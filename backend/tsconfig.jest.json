@@ -1,0 +1,15 @@
+// tsconfig.jest.json
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // Override the strict ESM settings for ts-jest transformation
+    "module": "NodeNext", 
+    "moduleResolution": "NodeNext",
+    // "moduleResolution": "node",
+    "target": "ES2020",
+    
+    // Disable strict ESM rules that interfere with Jest's mocking/setup
+    "verbatimModuleSyntax": false,
+    "isolatedModules": false
+  }
+}
