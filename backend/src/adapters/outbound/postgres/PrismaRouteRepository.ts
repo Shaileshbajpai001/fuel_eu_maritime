@@ -6,6 +6,14 @@ import  prisma from '../../../infrastructure/db/prisma.client.js';
 // It uses Prisma to interact with the database.
 export class PrismaRouteRepository implements IRouteRepository {
 
+  // ... inside class PrismaRouteRepository
+
+ async findByRouteIdAndYear(routeId: string, year: number): Promise<Route | null> {
+  return prisma.route.findFirst({
+    where: { routeId, year },
+  });
+  }  
+
   async getAll(): Promise<Route[]> {
     return prisma.route.findMany();
   }

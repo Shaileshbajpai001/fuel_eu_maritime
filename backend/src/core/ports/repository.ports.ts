@@ -5,12 +5,17 @@ export interface IRouteRepository {
   getAll(): Promise<Route[]>;
   findBaseline(): Promise<Route | null>;
   setAsBaseline(routeId: string): Promise<void>;
+  findByRouteIdAndYear(routeId: string, year: number): Promise<Route | null>;               // corrected function in core/application/RouteUseCases.test.ts
 }
 
 export interface IComplianceRepository {
-  save(cb: ComplianceBalance): Promise<ComplianceBalance>;
+  saveCB(cb: ComplianceBalance): Promise<ComplianceBalance>;
   findByShipAndYear(shipId: string, year: number): Promise<ComplianceBalance | null>;
-  // We will add more as we build (e.g., for banking)
+
+  // Methods for banking
+  addBankEntry(entry: { shipId: string, year: number, amountGco2eq: number }): Promise<void>;
+  getBankEntries(shipId: string, year: number): Promise<{ amountGco2eq: number }[]>;
+  getTotalBanked(shipId: string): Promise<number>;
 }
 
 export interface IPoolRepository {

@@ -8,6 +8,7 @@ const mockRouteRepository: IRouteRepository = {
     getAll: jest.fn(),
     findBaseline: jest.fn(),
     setAsBaseline: jest.fn(),
+    findByRouteIdAndYear: jest.fn()
 };
 
 // Sample data for testing

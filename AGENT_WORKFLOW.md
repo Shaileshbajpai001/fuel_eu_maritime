@@ -398,8 +398,16 @@ Modern TypeScript: Enforced the use of modern, strict TypeScript compiler option
 --------------------------------------------------------------------------------------------------------------------------------
 
 # EXAMPLE 9
+* Prompt - Jest Config	ReferenceError: module is not defined in ES module scope	
+* Output gemini - Advised renaming jest.config.js to jest.config.cjs to enforce CommonJS loading for the configuration file.
+* Modification in output - N/A. The fix addressed the CJS/ESM conflict directly.
 
 
+
+# example - Missing Mock Property	
+* Property - 'findByRouteIdAndYear' is missing in type ... but required in type 'IRouteRepository'.	
+* gemini output - Advised adding the missing method signature to the IRouteRepository interface definition, then adding findByRouteIdAndYear: jest.fn(), to the mock object.
+* Correction - The fix targeted the root cause: the required method was missing from the interface definition, causing the mock to fail type checking.
 --------------------------------------------------------------------------------------------------------------------------------
 
 # EXAMPLE 10
