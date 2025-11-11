@@ -1,5 +1,6 @@
 // backend/src/core/ports/usecase.ports.ts
 import type { ComparisonData, Route, ComplianceBalance } from '../domain/entities.js';
+import type { PoolResult, PoolMemberInput } from '../domain/entities.js';
 
 export interface IGetRoutesUseCase {
   execute(): Promise<Route[]>;
@@ -31,4 +32,8 @@ export interface IBankSurplusUseCase {
 
 export interface IApplyBankedUseCase {
   execute(shipId: string, amount: number): Promise<void>;
+}
+
+export interface ICreatePoolUseCase {
+  execute(year: number, members: PoolMemberInput[]): Promise<PoolResult>;
 }

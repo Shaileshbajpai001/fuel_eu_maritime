@@ -20,6 +20,16 @@ import {
   ApplyBankedUseCase
 } from '../../core/application/ComplianceUseCases.js';
 
+// ... (keep existing imports)
+import { PoolController } from '../../adapters/inbound/http/PoolController.js';
+import { PrismaPoolRepository } from '../../adapters/outbound/postgres/PrismaPoolRepository.js';
+import { CreatePoolUseCase } from '../../core/application/PoolUseCases.js';
+
+
+
+
+
+
 // --- This is the "Dependency Injection" part ---
 // We create the *real* implementations here
 
@@ -60,6 +70,17 @@ const complianceController = new ComplianceController(
 );
 
 
+// 1. Create the new repository
+const poolRepository = new PrismaPoolRepository();
+
+// 2. Create the new use case
+const createPoolUseCase = new CreatePoolUseCase(poolRepository);
+
+// 3. Create the new controller
+const poolController = new PoolController(
+  createPoolUseCase
+);
+
 // --- End of Dependency Injection ---
 
 // Create the Express app
@@ -83,6 +104,9 @@ router.get('/compliance/adjusted-cb', complianceController.getAdjustedCB.bind(co
 router.get('/banking/records', complianceController.getBankedRecords.bind(complianceController));
 router.post('/banking/bank', complianceController.bankSurplus.bind(complianceController));
 router.post('/banking/apply', complianceController.applyBanked.bind(complianceController));
+
+// pooling routes
+router.post('/pools', poolController.createPool.bind(poolController));
 
 app.use('/api', router); // Prefix all our routes with /api
 

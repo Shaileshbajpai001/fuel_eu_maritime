@@ -1,5 +1,6 @@
 // backend/src/core/ports/repository.ports.ts
 import type { Route, ComplianceBalance } from '../domain/entities.js';
+import type { PoolResult, PoolMemberInput } from '../domain/entities.js';
 
 export interface IRouteRepository {
   getAll(): Promise<Route[]>;
@@ -18,8 +19,12 @@ export interface IComplianceRepository {
   getTotalBanked(shipId: string): Promise<number>;
 }
 
+//ipoolrepo is now generating
 export interface IPoolRepository {
-  // We will define this when we build the pooling feature
+  createPool(
+    year: number,
+    members: (PoolMemberInput & { cbAfter: number })[]
+  ): Promise<PoolResult>;
 }
 
 // ... other repositories like IBankingRepository
