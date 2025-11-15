@@ -461,7 +461,35 @@ Block-by-Block Prompting: The most successful technique was prompting the AI in 
 ----------------------------------------------------------------------------
 
 # EXAMPLE 11
+   * Prompt Type	Exact Prompt:	Refinement/Correction
+	"Set up the frontend's Hexagonal Architecture (e.g., src/core/domain, src/adapters/ui/components, src/adapters/infrastructure/api). Implement the ApiClient (infrastructure adapter) using axios... Build the main layout (Tabs)... Generate a responsive React/Tailwind data table component... Build the 'Routes' tab: fetch data, display in the table, wire up filters... and the 'Set Baseline' button."	
+   * Generated Snippet (Gemini)
+    Generated three files: package.json (dependencies), README.md (setup guide), and the main App.jsx file.
+   * Correction/Adjustment:
+    Due to the single-file React mandate, the ApiClient used the built-in fetch API instead of axios. This substitution was necessary to avoid external imports breaking the standalone component, while preserving the infrastructural role of the adapter.
 
+## Validation / Corrections
+Hexagonal Validation: The core principle of the Hexagonal Architecture—separating Domain, Application, and Infrastructure—was validated by enforcing dedicated code sections within the single file: the ApiClient (Infrastructure) is the only place network logic resides, and the useRouteData hook (Application) mediates between the UI and the Infrastructure.
 
+Data Table Validation: The generated DataTable component meets the requirements for responsiveness, accepts dynamic columns and data props, and includes working client-side sorting.
+
+routes Tab Logic: The "Routes" tab correctly implements the full workflow
+
+**Observations**
+Where agent saved time: The agent saved significant development time by generating the entire application scaffolding (dependencies, architecture, layout, data table, and primary feature logic) in one comprehensive turn, eliminating the need to define component interfaces and state management boilerplate manually.
+
+Where it failed or hallucinated: The explicit request for axios could not be strictly met due to the single-file constraint. The agent successfully substituted axios with the native fetch API while maintaining the conceptual structure of the ApiClient, minimizing the impact of the constraint.
+
+How tools combined: N/A. This stage involved pure, complex code generation against strict architectural and deployment constraints (single file).
+
+### Best Practices Followed
+Single-File Mandate Adherence: All components, styling (Tailwind), and application logic were correctly placed into a single App.jsx file, guaranteeing immediate runnability in an appropriate environment.
+
+Hexagonal Architecture (Conceptual): The code was logically separated using custom hooks (useRouteData) and dedicated objects (ApiClient) to maintain the principles of the Hexagonal Architecture, ensuring high maintainability and testability of the infrastructure logic.
 -----------------------------------------------------------------------------
 # EXAMPLE 12
+
+
+
+----------------------------------------------------------------------------
+#EXAMPLE 13
